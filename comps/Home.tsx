@@ -11,6 +11,17 @@ interface HomeProps {
 }
 
 const Home = ({ products, bannerData }: HomeProps) => {
+  const [sortedproducts, setSortedProducs] = useState<ProductsTypes[]>(products);
+
+const handleSort = (e: React.ChangeEvent<HTMLSelectElement>) => {
+  if (e.target.value === "highToLow") {
+    const sorted = [...products].sort((a, b) => b.price - a.price);
+    setSortedProducs(sorted);
+  } else if (e.target.value === "lowToHigh") {
+    const sorted = [...products].sort((a, b) => a.price - b.price);
+    setSortedProducs(sorted);
+  }
+};
 
   return (
     <main>
@@ -24,17 +35,25 @@ const Home = ({ products, bannerData }: HomeProps) => {
         >
           Best Selling Headphones
         </h1>
+
+        <select
+          onChange={handleSort}
+        >    
+          <option value="">Sort By</option>
+          <option value="highToLow">Price: High to Low</option>
+          <option value="lowToHigh">Price: Low to HIGH</option>
+        </select>
         {/* <p className=" text-base text-secondary">Best in the Market</p> */}
       </section>
 
       {/* === SHOW PRODUCTS  */}
       <section
-        className=" grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4
+        className=" grid grid-cols-2 sm:grid-cols-3 md:grid-cols-3
        lg:mx-20 overflow-hidden
       "
       >
         {/* === MAP PRODUCTS  */}
-        {products?.map((products: ProductsTypes) => {
+        {sortedproducts?.map((products: ProductsTypes) => {
           return <Products key={products._id} products={products} />;
         })}
       </section>

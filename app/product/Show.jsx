@@ -146,7 +146,7 @@ const Show = ({ product, products }) => {
 
               <div
                 className=" text-center hover:scale-105 transition shadow-md cursor-pointer
-                 bg-primary text-xl px-8 py-2  text-highLight ring-1 ring-primary"
+                 bg-primary text-xl px-8 py-2  text-highLight ring-1 text-white"
               >
                 Buy Now
               </div>
@@ -154,7 +154,7 @@ const Show = ({ product, products }) => {
           </section>
         </div>
 
-        <Marquee products={products} />
+        <Marquee products={products} direction="rtl" autoplay="true" />
       </div>
     </div>
   );
